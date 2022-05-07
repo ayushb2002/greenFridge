@@ -1,0 +1,1 @@
+# Delete this file and initialize a Django Rest Framework Project
