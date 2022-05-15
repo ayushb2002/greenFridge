@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework'
+    'rest_framework',
+    'rest_framework.authtoken',
+    'api'
 ]
 
 MIDDLEWARE = [
@@ -79,9 +81,17 @@ DATABASES = {
         'ENGINE': 'djongo',
         'NAME': 'innohacks',
         'CLIENT': {
-            'host': ''
+            'host': 'mongodb+srv://innouser:innouser@fqicluster.avrce.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
         }
     }
+}
+
+# Rest Framework Settings
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
 }
 
 
