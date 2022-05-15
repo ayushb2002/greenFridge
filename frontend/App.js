@@ -1,4 +1,3 @@
-import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
