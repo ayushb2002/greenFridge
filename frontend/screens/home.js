@@ -15,7 +15,7 @@ export default function Home({navigation}){
          </TouchableOpacity>
 
          <TouchableOpacity style={styles.but2}>
-         <Text style={styles.butText}>SNAP</Text>
+         <Text style={styles.butText2}>O</Text>
          </TouchableOpacity>
 
          <TouchableOpacity style={styles.but}>
@@ -59,11 +59,16 @@ const styles = StyleSheet.create({
       color: "white",
       fontWeight: "bold",
     },
+    butText2: {
+      color: "white",
+      fontWeight: "bold",
+      fontSize: 20
+    },
     but2: {
       borderRadius: 50,
       backgroundColor: "#7CB342",
       alignItems: "center",
-      padding: 10,
+      width: 50,
       justifyContent: "center",
     },
     bg: {
