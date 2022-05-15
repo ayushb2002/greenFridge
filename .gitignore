@@ -15,3 +15,6 @@
 **/.env
 **/.env.local
 **/venv/
+
+client.py
+bread.jpg
