@@ -3,14 +3,14 @@ import { Button, StyleSheet, View, Text,TouchableOpacity } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-export default function Home(){
+export default function Home({navigation}){
     return(
       <View style={styles.bg}>
 
         <View style={styles.frontPageBut}>
 
         <SafeAreaView style={styles.alternativeLayoutButtonContainer}>
-         <TouchableOpacity style={styles.but}>
+         <TouchableOpacity style={styles.but} onPress={()=> navigation.navigate('Menu')}>
          <Text style={styles.butText}>MENU</Text>
          </TouchableOpacity>
 

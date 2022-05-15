@@ -3,7 +3,7 @@ import { Button, StyleSheet, View, Text,TouchableOpacity } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-export default function Register({navigation}){
+export default function Logout({navigation}){
     return(
       <View style={styles.bg}>
 
