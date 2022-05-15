@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   ImageBackground,
 } from "react-native";
-import { StatusBar } from "expo-status-bar";
+import * as ImagePicker from 'expo-image-picker';
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Camera } from "expo-camera";
 
@@ -107,6 +107,20 @@ export default function Home() {
   }
 
   const __startCamera = async () => {}
+
+  const choosePic = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      quality: 1
+    })
+
+    console.log(result)
+
+    if (!result.cancelled) {
+      setCapturedImage(result)
+    }
+  }
   return (
     <View style={styles.bg}>
       {(previewVisible && capturedImage) ? (
