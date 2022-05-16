@@ -29,10 +29,10 @@ export default function Profile({navigation}){
           />
         </View>
 
-        <View style={{ marginTop: "40%" }}>
-        <Text style={styles.profileOptions}>Email Address - </Text>
-        <Text style={styles.profileOptions}>Phone Number - </Text>
-        <Text style={styles.profileOptions}>Location Saved - </Text>
+        <View style={{ marginTop: "40%", marginLeft: 20}}>
+        <Text style={styles.profileOptions}>Email: </Text>
+        <Text style={styles.profileOptions}>Contact Number: </Text>
+        <Text style={styles.profileOptions}>Location Saved: </Text>
       </View>
 
       <View style={styles.back}>
@@ -72,12 +72,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     fontSize: 20,
     position: "absolute",
-    right: 0,
-    padding: 7
+    right: 1,
+    padding: 7,
+    fontWeight: "bold",
   },
   profileOptions: {
     fontSize: 15,
-    textAlign: "center",
+    textAlign: "left",
     marginVertical: "5%"
   },
   back:{
