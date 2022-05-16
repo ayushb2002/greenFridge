@@ -10,8 +10,14 @@
 **/*.orig.*
 **/web-build/
 
+**/model_fresh_stale.h5
 # macOS
 **/.DS_Store
 **/.env
 **/.env.local
 **/venv/
+
+client.py
+bread.jpg
+bread_stale.jog
+stale2.jpg
