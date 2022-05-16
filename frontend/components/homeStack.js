@@ -8,6 +8,8 @@ import Menu  from '../screens/menu';
 import Logout from '../screens/logout'
 import Profile from '../screens/profile';
 import Gallery from '../screens/gallery';
+import ProfileRec from '../screens/profileRec';
+import Receive from '../screens/receive';
 const Stack = createStackNavigator();
 
 function MyStack() {
@@ -18,8 +20,10 @@ function MyStack() {
       <Stack.Screen name="Register" component={Register} />
       <Stack.Screen name="Menu" component={Menu} />
       <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="ProfileRec" component={ProfileRec} />
       <Stack.Screen name="Logout" component={Logout} />
       <Stack.Screen name="Gallery" component={Gallery} />
+      <Stack.Screen name="Receive" component={Receive} />
 
     </Stack.Navigator>
   );

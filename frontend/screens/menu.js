@@ -26,6 +26,9 @@ export default function Menu({navigation}) {
             <Text style={styles.menuText} onPress={()=> navigation.navigate('Profile')}>Profile</Text>
           </View>
           <View style={styles.menuItem}>
+            <Text style={styles.menuText} onPress={()=> navigation.navigate('ProfileRec')}>Receiver Profile</Text>
+          </View>
+          <View style={styles.menuItem}>
             <Text style={styles.menuText} onPress={()=> navigation.navigate('Login')}>Login</Text>
           </View>
           <View style={styles.menuItem}>
@@ -53,6 +56,7 @@ export default function Menu({navigation}) {
     },
     menuText: {
       color: "white",
-      fontWeight: "bold"
+      fontWeight: "bold",
+      fontSize: 18
     }
   });

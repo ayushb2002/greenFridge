@@ -66,7 +66,7 @@ export default function Profile({navigation}){
           />
         </View>
 
-        <View style={{ marginTop: "40%" }}>
+        <View style={{ marginTop: "40%", marginLeft: 20 }}>
         <Text style={styles.profileOptions}>Email Address - {userProfile?.email}</Text>
         <Text style={styles.profileOptions}>Location Saved - {userLocation?.coords?.latitude}, {userLocation?.coords?.longitude}</Text>
       </View>
@@ -112,12 +112,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     fontSize: 20,
     position: "absolute",
-    right: 0,
-    padding: 7
+    right: 1,
+    padding: 7,
+    fontWeight: "bold",
   },
   profileOptions: {
     fontSize: 15,
-    textAlign: "center",
+    textAlign: "left",
     marginVertical: "5%"
   },
   back:{
