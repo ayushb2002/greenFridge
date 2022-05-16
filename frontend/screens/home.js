@@ -83,7 +83,7 @@ const CameraPreview = ({ photo, retakePicture, savePhoto }) => {
   );
 };
 
-export default function Home() {
+export default function Home({navigation}) {
   const [type, setType] = React.useState(Camera.Constants.Type.back);
   const [previewVisible, setPreviewVisible] = React.useState(false);
   const [capturedImage, setCapturedImage] = React.useState(null);
@@ -167,7 +167,7 @@ export default function Home() {
       )}
       <View style={styles.frontPageBut}>
         <SafeAreaView style={styles.alternativeLayoutButtonContainer}>
-          <TouchableOpacity style={styles.but}>
+          <TouchableOpacity onPress={()=> navigation.navigate('Menu')} style={styles.but}>
             <Text style={styles.butText}>MENU</Text>
           </TouchableOpacity>
 
@@ -175,7 +175,7 @@ export default function Home() {
             <Text style={styles.butText}>SNAP</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.but}>
+          <TouchableOpacity onPress={()=> navigation.navigate('Gallery')} style={styles.but}>
             <Text style={styles.butText}>GALLERY</Text>
           </TouchableOpacity>
         </SafeAreaView>
