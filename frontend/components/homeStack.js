@@ -7,7 +7,7 @@ import Register from '../screens/register'
 import Menu  from '../screens/menu';
 import Logout from '../screens/logout'
 import Profile from '../screens/profile';
-
+import Gallery from '../screens/gallery';
 const Stack = createStackNavigator();
 
 function MyStack() {
@@ -19,6 +19,7 @@ function MyStack() {
       <Stack.Screen name="Menu" component={Menu} />
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="Logout" component={Logout} />
+      <Stack.Screen name="Gallery" component={Gallery} />
 
     </Stack.Navigator>
   );

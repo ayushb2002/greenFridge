@@ -1,79 +1,98 @@
-import React from 'react';
-import { Button, StyleSheet, View, Text,TouchableOpacity } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import React from 'react'
+import {
+  View,
+  Button,
+  TextInput,
+  StyleSheet
+} from 'react-native'
 
-export default function Register({navigation}){
-    return(
-      <View style={styles.bg}>
-
-        <View style={styles.frontPageBut}>
-
-        <SafeAreaView style={styles.alternativeLayoutButtonContainer}>
-         <TouchableOpacity style={styles.but} onPress={()=> navigation.navigate('Menu')}>
-         <Text style={styles.butText}>MENU</Text>
-         </TouchableOpacity>
-
-         <TouchableOpacity style={styles.but2}>
-         <Text style={styles.butText}>SNAP</Text>
-         </TouchableOpacity>
-
-         <TouchableOpacity style={styles.but}>
-         <Text style={styles.butText}>GALLERY</Text>
-         </TouchableOpacity>
-        </SafeAreaView>
-        </View>
-
-
-        </View>
-    );
+export default class Register extends React.Component {
+  state = {
+    firstName: '', lastName: '', username: '', password: '', email: '', phone_number: ''
+  }
+  onChangeText = (key, val) => {
+    this.setState({ [key]: val })
+  }
+  Register = async ({navigation}) => {
+    const { username, password, email, phone_number } = this.state
+    try {
+      // here place your Register logic
+      console.log('user successfully signed up!: ', success)
+    } catch (err) {
+      console.log('error signing up: ', err)
+    }
+  }
+ 
+  render() {
+    return (
+      <View style={styles.container}>
+        <TextInput
+          style={styles.input}
+          placeholder='First Name'
+          autoCapitalize="none"
+          placeholderTextColor='white'
+          onChangeText={val => this.onChangeText('firstName', val)}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder='Last Name'
+          autoCapitalize="none"
+          placeholderTextColor='white'
+          onChangeText={val => this.onChangeText('lastName', val)}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder='Username'
+          autoCapitalize="none"
+          placeholderTextColor='white'
+          onChangeText={val => this.onChangeText('username', val)}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder='Password'
+          secureTextEntry={true}
+          autoCapitalize="none"
+          placeholderTextColor='white'
+          onChangeText={val => this.onChangeText('password', val)}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder='Email'
+          autoCapitalize="none"
+          placeholderTextColor='white'
+          onChangeText={val => this.onChangeText('email', val)}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder='Phone Number'
+          autoCapitalize="none"
+          placeholderTextColor='white'
+          onChangeText={val => this.onChangeText('phone_number', val)}
+        />
+        <Button
+          title='Sign Up'
+          onPress={this.Register}
+        />
+      </View>
+    )
+  }
 }
 
-
 const styles = StyleSheet.create({
-    container: {
-     flex: 1,
-     justifyContent: 'center',
-    },
-    buttonContainer: {
-      margin: 20
-    },
-    alternativeLayoutButtonContainer: {
-      
-      width:"90%",
-      aligSelf:'flex-end',
-      top: 0,
-      margin: 20,
-      flexDirection: 'row',
-      justifyContent: 'space-between'
-    },
-    but: {
-      borderRadius: 10,
-      backgroundColor: "#7CB342",
-      alignItems: "center",
-      height: 40,
-      width: 60,
-      justifyContent: "center",
-    },
-    butText: {
-      color: "white",
-      fontWeight: "bold",
-    },
-    but2: {
-      borderRadius: 50,
-      backgroundColor: "#7CB342",
-      alignItems: "center",
-      padding: 10,
-      justifyContent: "center",
-    },
-    bg: {
-      backgroundColor:"black"
-    },
-
-    frontPageBut: {
-      backgroundColor: "pink"
-    }
-  
-  });
-  
-  
+  input: {
+    width: 350,
+    height: 55,
+    backgroundColor: '#42A5F5',
+    margin: 10,
+    padding: 8,
+    color: 'white',
+    borderRadius: 14,
+    fontSize: 18,
+    fontWeight: '500',
+  },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+})

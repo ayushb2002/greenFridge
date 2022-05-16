@@ -3,12 +3,12 @@ import { Button, StyleSheet, View, Text,TouchableOpacity } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-export default function Home({navigation}){
+export default function Gallery({navigation}){
     return(
       <View style={styles.bg}>
 
         <View >
-          <View style={styles.headingview}>
+          <View>
             <Text style={styles.heading}> Green Fridge </Text>
           </View>
 
@@ -81,13 +81,8 @@ const styles = StyleSheet.create({
       
     },
     heading: {
-      fontWeight: "bold",
-      fontSize: 20,
+      fontFamily: "Cedarville Cursive",
       color: "#7CB342"
-    },
-
-    headingview: {
-      padding: 10,
     }
   
   });

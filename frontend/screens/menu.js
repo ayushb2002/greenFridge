@@ -8,8 +8,8 @@ export default function Menu({navigation}) {
       <View>
         <View style={styles.sideMenu}>
           <View style={styles.menuItem}>
-            <Text style={{ color: "green", fontWeight: "bold" }}>
-              Green Fridge
+            <Text style={{ color: "#2E7D32", fontWeight: "700" , fontSize: 20}}>
+              GREEN FRIDGE
             </Text>
           </View>
           <View
@@ -44,7 +44,7 @@ export default function Menu({navigation}) {
   const styles = StyleSheet.create({
     sideMenu: {
       width: "70%",
-      backgroundColor: "black",
+      backgroundColor: "#AFB42B",
       height: ScreenHeight
     },
     menuItem: {
