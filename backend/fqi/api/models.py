@@ -6,6 +6,7 @@ from django.conf import settings
 from djongo import models
 from django.db.models.signals import pre_save,post_save
 from django.dispatch import receiver
+import numpy as np
 from rest_framework.authtoken.models import Token
 
 import requests
@@ -60,6 +61,11 @@ def create_data_batches(X, y=None, batch_size=BATCH_SIZE, valid_data=False, test
 
   return data_batch
 
+unique_labels = [True, False]
+
+def get_pred_label(prediction_probabilites):
+    return unique_labels[np.argmax(prediction_probabilites)]
+
 def process_image(image_path):
   """
   Takes image filepath and convert it into tensors
@@ -112,7 +118,7 @@ class Assignments(models.Model):
 class FoodItem(models.Model):
     _id = models.ObjectIdField(primary_key=True)
     name = models.CharField(max_length=60)
-    label = models.CharField(max_length=2, choices=[("F","Fresh"), ("S", "Stale")])
+    label = models.CharField(max_length=6)
     postedBy = models.EmailField()
     pickedUp = models.BooleanField(default=False)
     pickedUpBy = models.CharField(max_length=70, blank=True)
@@ -135,8 +141,8 @@ def assign_reciever(sender, instance=None, **kwargs):
     custom_data = create_data_batches(custom_image, test_data=True)
     prediction  = loadedModel.predict(custom_data)
     print(prediction)
-    pred_label = "F" if prediction[0][0] == False and prediction[0][1] == True else "S"
-    print(f"Predicted as {pred_label}")
+    pred_label = [get_pred_label(prediction[i]) for i in range(len(prediction))]
+    print(f"Predicted as {pred_label[0]}")
     allRecievers = Receiver.objects.all()
     foodLocation = (str(instance.pickLng), str(instance.pickLat))
     minDist = inf
@@ -153,7 +159,7 @@ def assign_reciever(sender, instance=None, **kwargs):
             minRecieverId = receiver._id
             minDist = dist
         instance.pickedUpBy = minRecieverId
-        instance.label = pred_label
+        instance.label = "Fresh" if pred_label[0] else "Stale"
 
 @receiver(post_save, sender=FoodItem)
 def add_assignment(sender, instance=None, created=False, **kwargs):

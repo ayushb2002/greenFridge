@@ -2,22 +2,59 @@ import React from 'react';
 import { Button, StyleSheet, View, Text,TouchableOpacity, Image } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import axios from 'axios';
+import { Storage } from 'expo-storage';
+import * as Location from "expo-location";
+import Svg, { SvgCssUri } from 'react-native-svg';
 
 export default function Profile({navigation}){
+  const [userProfile, setUserProfile] = React.useState({})
+  const [userLocation, setLocation] = React.useState({})
+  const [donationList, setDonationList] = React.useState([])
+
+  React.useEffect(() => {
+    (async () => {
+      try {
+        const token = await Storage.getItem({key: 'token'})
+        if (!token) {
+          console.log("Unauthenicated")
+          return;
+        }
+        const getProfile = await axios.get('http://10.21.85.114:8000/api/auth/profile', {headers: {"Authorization": `Token ${token}`}})
+        console.log(getProfile.data)
+        let {status} = await Location.requestForegroundPermissionsAsync();
+        if (status !== 'granted') {
+          console.log('Permission to access location was denied');
+          return;
+        }
+        let location = await Location.getCurrentPositionAsync()
+        setLocation(location)
+        setUserProfile(getProfile.data)
+        
+        // const listResp = await axios.get('http://10.21.85.114:8000/api/food', {params: {user: getProfile?.data?.email}, headers: {"Authorization": `Token ${token}`}})
+        // const dt = JSON.parse(listResp.data)
+        // console.log(dt.foodItems)
+        // setDonationList(dt.foodItems)
+      } catch (err) {
+        console.error(err)
+        if (err.response) {
+          console.log(err.response)
+        }
+      }
+    })()
+  }, [])
     return(
       <View>
         <View style={styles.container}>
           <View style={styles.nav1}>
-          <Image
+          <SvgCssUri
         style={styles.tinyLogo}
-        source={{
-          uri: 'https://reactnative.dev/img/tiny_logo.png',
-        }}
+        uri={`https://avatars.dicebear.com/api/human/john.svg`}
       />
           </View>
           <View style={styles.nav2}>
             <Text style={styles.nav2Text}>
-              Welcome User
+              Welcome {userProfile?.first_name} {userProfile?.last_name}
             </Text>
           </View>
           <View
@@ -30,9 +67,12 @@ export default function Profile({navigation}){
         </View>
 
         <View style={{ marginTop: "40%" }}>
-        <Text style={styles.profileOptions}>Email Address - </Text>
-        <Text style={styles.profileOptions}>Phone Number - </Text>
-        <Text style={styles.profileOptions}>Location Saved - </Text>
+        <Text style={styles.profileOptions}>Email Address - {userProfile?.email}</Text>
+        <Text style={styles.profileOptions}>Location Saved - {userLocation?.coords?.latitude}, {userLocation?.coords?.longitude}</Text>
+      </View>
+
+      <View style={{marginTop: 20}}>
+
       </View>
 
       <View style={styles.back}>

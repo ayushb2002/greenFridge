@@ -13,7 +13,7 @@ def convertToDict(obj):
     return {"id": str(obj._id),"name": obj.name, "label": obj.label, "postedBy": obj.postedBy, "pickedUp": obj.pickedUp, "pickedUpBy": obj.pickedUpBy, "pickLat": str(obj.pickLat), "pickLng": str(obj.pickLng)}
 
 def userToDict(user):
-    return {"id": user.id, "name": user.username, "email": user.email, "first_name": user.first_name, "last_name": user.last_name}
+    return {"id": user.id, "name": user.username, "email": user.email, "first_name": user.first_name, "last_name": user.last_name, "username": user.username}
 
 @api_view(["GET"])
 def api_home(request):
@@ -37,9 +37,17 @@ def api_add_food_item(request):
             return Response({"foodItem": str(instance), "addedBy": str(request.user)})
     else:
         params = request.query_params.get('id', None)
+        userId = request.query_params.get('user', None)
+        print(userId)
         if (params):
             foodItems = FoodItem.objects.get(_id=bson.ObjectId(params))
             return Response({"foodItem": convertToDict(foodItems), "requestedBy": str(request.user)})
+        if (userId):
+            foodItems = FoodItem.objects.filter(postedBy=userId)
+            fI = []
+            for i in range(0, len(foodItems)):
+                fI.append(convertToDict(foodItems[i]))
+            return Response({"foodItems": fI, "requestedBy": str(request.user)})
         allFoodItems = FoodItem.objects.all()
         fI = []
         for i in range(0, len(allFoodItems)):
@@ -51,7 +59,7 @@ def api_auth_register(request):
     """
     API to register a user
     """
-    serialized = UserSerializer(data=request.data, files=request.files)
+    serialized = UserSerializer(data=request.data)
     if (serialized.is_valid()):
         user = serialized.create(serialized.validated_data)
         return Response({"user": str(user), "status": "Created"})
