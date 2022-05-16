@@ -6,6 +6,7 @@ import {
   Text,
   TouchableOpacity,
   ImageBackground,
+  Dimensions
 } from "react-native";
 import * as ImagePicker from 'expo-image-picker';
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -171,10 +172,6 @@ export default function Home({navigation}) {
             <Text style={styles.butText}>MENU</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity onClick={__takePic} style={styles.but2}>
-            <Text style={styles.butText}>SNAP</Text>
-          </TouchableOpacity>
-
           <TouchableOpacity onPress={()=> navigation.navigate('Gallery')} style={styles.but}>
             <Text style={styles.butText}>GALLERY</Text>
           </TouchableOpacity>
@@ -183,6 +180,8 @@ export default function Home({navigation}) {
     </View>
   );
 }
+
+let ScreenHeight = Dimensions.get("window").height;
 
 const styles = StyleSheet.create({
   container: {
@@ -201,32 +200,25 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   but: {
-    borderRadius: 10,
+    borderRadius: 5,
     backgroundColor: "#7CB342",
     alignItems: "center",
-    height: 40,
-    width: 60,
+    height: 50,
+    width: 90,
     justifyContent: "center",
   },
   butText: {
     color: "white",
     fontWeight: "bold",
   },
-  but2: {
-    borderRadius: 50,
-    backgroundColor: "#7CB342",
-    alignItems: "center",
-    padding: 10,
-    justifyContent: "center",
-  },
   bg: {
-    backgroundColor: "black",
+
   },
   camera: {
-    height: "80%",
+    height: ScreenHeight*0.7,
   },
 
   frontPageBut: {
-    backgroundColor: "pink",
+
   },
 });
