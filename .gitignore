@@ -10,6 +10,7 @@
 **/*.orig.*
 **/web-build/
 
+**/model_fresh_stale.h5
 # macOS
 **/.DS_Store
 **/.env

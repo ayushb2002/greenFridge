@@ -1,21 +1,31 @@
+import base64,io
+from PIL import Image
 from rest_framework import serializers
 from .models import FoodItem, Organization, Receiver
 from django.contrib.auth.models import User
+from django.core.files.uploadedfile import InMemoryUploadedFile
+
+def decode_img(data):
+    try:
+        data = base64.b64decode(data.encode('utf-8'))
+        buf = io.BytesIO(data)
+        img = Image.open(buf)
+        return img
+    except:
+        return None
 
 class FoodItemSerializer(serializers.Serializer):
     def create(self, validated_data):
-        # Model to determine the Label
         foodItem = FoodItem.objects.create(
             name=validated_data.get('name'),
-            label=validated_data.get('label', "F"),
             postedBy=validated_data.get('posted_by'),
             pickedUp=validated_data.get('picked_up', False),
             pickedUpBy=validated_data.get('org_name'),
             pickLat=validated_data.get('pick_lat', 0.00000),
-            pickLng=validated_data.get('pick_lng', 0.00000)
+            pickLng=validated_data.get('pick_lng', 0.00000),
+            image = validated_data.get('img_data', None)
         )
-
-        foodItem.save()
+        
         return foodItem
     class Meta:
         model = FoodItem
